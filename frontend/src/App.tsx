@@ -1,26 +1,48 @@
-import "./App.css";
 import { sampleProducts } from "./data";
+import { Container, Navbar, Nav, Row, Col } from "react-bootstrap";
 
 function App() {
   return (
-    <div>
+    <div className="d-flex flex-column vh-100">
       <header>
-        <h1>Leafy Lane</h1>
+        <Navbar bg="dark" variant="dark" expand="lg">
+          <Container>
+            <Navbar.Brand href="/">Leafy Lane</Navbar.Brand>
+          </Container>
+          <Nav>
+            <Nav.Item>
+              <Nav.Link href="/cart" className="nav-link">
+                Cart
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/signin" className="nav-link">
+                Sign In
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar>
       </header>
       <main>
-        {sampleProducts.map((product) => (
-          <li key={product.slug}>
-            <img
-              src={product.image}
-              alt={product.name}
-              className="product-image"
-            />
-            <h2>{product.name}</h2>
-            <p>£ {product.price}</p>
-          </li>
-        ))}
+        <Container className="mt-5">
+          <Row>
+            {sampleProducts.map((product) => (
+              <Col key={product.slug} sm={6} md={4} lg={3}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="product-image image-responsive"
+                />
+                <h2>{product.name}</h2>
+                <p>£ {product.price}</p>
+              </Col>
+            ))}
+          </Row>
+        </Container>
       </main>
-      <footer>Leafy Lane 2023</footer>
+      <footer>
+        <div className="text-center">Leafy Lane 2023</div>
+      </footer>
     </div>
   );
 }
