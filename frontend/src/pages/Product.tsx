@@ -1,7 +1,15 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 function Product() {
-  return <div>Product</div>;
+  return (
+    <>
+      <Helmet>
+        <title>Product</title>
+      </Helmet>
+      <div>Product</div>
+    </>
+  );
 }
 
 export default Product;

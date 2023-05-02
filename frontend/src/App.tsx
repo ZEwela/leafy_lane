@@ -1,8 +1,13 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+
 function App() {
   return (
     <div className="d-flex flex-column vh-100">
+      <Helmet>
+        <title>Leafy Lane</title>
+      </Helmet>
       <header>
         <Navbar bg="dark" variant="dark" expand="lg">
           <Container>
