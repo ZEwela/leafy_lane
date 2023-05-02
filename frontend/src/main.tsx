@@ -11,6 +11,10 @@ import App from "./App.tsx";
 import "./index.css";
 import Home from "./pages/Home.tsx";
 import Product from "./pages/Product.tsx";
+import axios from "axios";
+
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:4000" : "/";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
