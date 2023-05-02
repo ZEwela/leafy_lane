@@ -8,7 +8,10 @@
 }
 
 .product-image {
-  max-width: 400px;
-  min-height: 300px;
-  width: 100%;
+  width: auto;
+  height: 400px;
+}
+
+.rating span {
+  color: #3d6c03;
 }
