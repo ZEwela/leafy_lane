@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import { sampleProducts } from "../data";
+import { sampleProducts } from "../../../backend/src/data";
 import { Link } from "react-router-dom";
 
 function Home() {
