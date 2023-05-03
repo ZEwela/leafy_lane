@@ -20,7 +20,7 @@ function ProductItem({ product }: { product: Product }) {
             Out of Stock
           </Button>
         ) : (
-          <Button>Add to Cart</Button>
+          <Button variant="success">Add to Cart</Button>
         )}
       </Card.Body>
     </Card>

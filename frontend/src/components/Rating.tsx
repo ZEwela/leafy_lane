@@ -58,11 +58,11 @@ function Rating(props: {
             rating >= 5
               ? "fas fa-star"
               : rating >= 4.5
-              ? "fas fa-star-half"
-              : "far fa-star"
+              ? "fas fa-star-half-o"
+              : "far fa-star-o"
           }
         />
-      </span>
+      </span>{" "}
       {caption ? (
         <span>{caption}</span>
       ) : numReviews != 0 ? (
