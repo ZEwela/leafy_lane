@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
   const {
@@ -30,7 +31,9 @@ function App() {
       <header>
         <Navbar expand="lg">
           <Container>
-            <Navbar.Brand href="/">Leafy Lane</Navbar.Brand>
+            <LinkContainer to="/">
+              <Navbar.Brand href="/">Leafy Lane</Navbar.Brand>
+            </LinkContainer>
           </Container>
           <Nav>
             <Button
