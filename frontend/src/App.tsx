@@ -1,12 +1,15 @@
-import { Container, Navbar, Nav, Button } from "react-bootstrap";
+import { Container, Navbar, Nav, Button, Badge } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Store } from "./Store";
 import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const {
-    state: { mode },
+    state: { mode, cart },
     dispatch,
   } = useContext(Store);
 
@@ -23,6 +26,7 @@ function App() {
       <Helmet>
         <title>Leafy Lane</title>
       </Helmet>
+      <ToastContainer position="bottom-center" limit={1} />
       <header>
         <Navbar expand="lg">
           <Container>
@@ -37,9 +41,14 @@ function App() {
               <i className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}></i>
             </Button>
             <Nav.Item>
-              <Nav.Link href="/cart" className="nav-link">
+              <Link to="/cart" className="nav-link">
                 Cart
-              </Nav.Link>
+                {cart.cartItems.length > 0 && (
+                  <Badge pill bg="danger">
+                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                  </Badge>
+                )}
+              </Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link href="/signin" className="nav-link">
