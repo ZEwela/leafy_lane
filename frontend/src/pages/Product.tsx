@@ -38,6 +38,7 @@ function Product() {
     toast.success("Product added to cart");
     navigate("/cart");
   };
+  console.log(product?.countInStock);
 
   return isLoading ? (
     <LoadingBox />

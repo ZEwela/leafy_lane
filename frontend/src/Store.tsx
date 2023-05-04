@@ -41,15 +41,13 @@ function reducer(state: AppStore, action: Action): AppStore {
       };
     case "CART_ADD_ITEM": {
       const newItem: CartItem = action.payload;
-      const existItem: CartItem | null | undefined = state.cart.cartItems.find(
-        (item: CartItem) => {
-          item._id === newItem._id;
-        }
+      const existItem = state.cart.cartItems.find(
+        (item: CartItem) => item._id === newItem._id
       );
       const cartItems: any = existItem
-        ? state.cart.cartItems.map((item: CartItem) => {
-            item._id === existItem._id ? newItem : item;
-          })
+        ? state.cart.cartItems.map((item: CartItem) =>
+            item._id === existItem._id ? newItem : item
+          )
         : [...state.cart.cartItems, newItem];
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
