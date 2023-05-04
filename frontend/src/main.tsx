@@ -16,6 +16,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryClient } from "@tanstack/react-query";
 import { StoreProvider } from "./Store.tsx";
 import Cart from "./pages/Cart.tsx";
+import Signin from "./pages/Signin.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route index={true} element={<Home />} />
       <Route path="product/:slug" element={<Product />} />
       <Route path="cart" element={<Cart />} />
+      <Route path="signin" element={<Signin />} />
     </Route>
   )
 );
@@ -30,14 +32,14 @@ const router = createBrowserRouter(
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  // <React.StrictMode>
-  <StoreProvider>
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </HelmetProvider>
-  </StoreProvider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <StoreProvider>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </HelmetProvider>
+    </StoreProvider>
+  </React.StrictMode>
 );

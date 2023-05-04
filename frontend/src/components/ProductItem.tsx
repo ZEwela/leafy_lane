@@ -23,6 +23,7 @@ function ProductItem({ product }: { product: Product }) {
       return;
     }
     dispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
+    toast.success("Product added to cart");
   };
 
   return (

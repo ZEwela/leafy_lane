@@ -1,4 +1,11 @@
-import { Container, Navbar, Nav, Button, Badge } from "react-bootstrap";
+import {
+  Container,
+  Navbar,
+  Nav,
+  Button,
+  Badge,
+  NavDropdown,
+} from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Store } from "./Store";
@@ -10,7 +17,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 function App() {
   const {
-    state: { mode, cart },
+    state: { mode, cart, userInfo },
     dispatch,
   } = useContext(Store);
 
@@ -22,12 +29,21 @@ function App() {
     dispatch({ type: "TOGGLE_MODE" });
   };
 
+  const signoutHandler = () => {
+    dispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+    window.location.href = "/signin";
+  };
+
   return (
     <div className="d-flex flex-column vh-100">
       <Helmet>
         <title>Leafy Lane</title>
       </Helmet>
-      <ToastContainer position="bottom-center" limit={1} />
+      <ToastContainer position="bottom-center" limit={10} autoClose={500} />
       <header>
         <Navbar expand="lg">
           <Container>
@@ -36,28 +52,38 @@ function App() {
             </LinkContainer>
           </Container>
           <Nav>
-            <Button
-              onClick={toggleModeHandler}
-              variant="secondary"
-              className="rounded-circle size-sm  m-1"
-            >
-              <i className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}></i>
-            </Button>
             <Nav.Item>
-              <Link to="/cart" className="nav-link">
-                Cart
-                {cart.cartItems.length > 0 && (
-                  <Badge pill bg="danger">
-                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                  </Badge>
-                )}
-              </Link>
+              <Button
+                onClick={toggleModeHandler}
+                variant="secondary"
+                className="rounded-circle size-sm  m-1"
+              >
+                <i className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}></i>
+              </Button>
             </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/signin" className="nav-link">
+            <Link to="/cart" className="nav-link">
+              Cart
+              {cart.cartItems.length > 0 && (
+                <Badge pill bg="danger">
+                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                </Badge>
+              )}
+            </Link>
+            {userInfo ? (
+              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                <Link
+                  className="dropdown-item"
+                  to="#signout"
+                  onClick={signoutHandler}
+                >
+                  Sign Out
+                </Link>
+              </NavDropdown>
+            ) : (
+              <Link to="/signin" className="nav-link">
                 Sign In
-              </Nav.Link>
-            </Nav.Item>
+              </Link>
+            )}
           </Nav>
         </Navbar>
       </header>

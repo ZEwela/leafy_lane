@@ -35,10 +35,9 @@ function Product() {
       type: "CART_ADD_ITEM",
       payload: { ...convertProductToCartItem(product!), quantity },
     });
-    toast.success("Product added to cart");
+
     navigate("/cart");
   };
-  console.log(product?.countInStock);
 
   return isLoading ? (
     <LoadingBox />

@@ -1,11 +1,16 @@
 import React from "react";
 import { Cart, CartItem } from "./types/Cart";
+import { UserInfo } from "./types/UserInfo";
 type AppStore = {
   mode: string;
   cart: Cart;
+  userInfo?: UserInfo;
 };
 
 const initialState: AppStore = {
+  userInfo: localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo")!)
+    : null,
   mode: localStorage.getItem("mode")
     ? localStorage.getItem("mode")!
     : window.matchMedia &&
@@ -30,7 +35,10 @@ const initialState: AppStore = {
 
 type Action =
   | { type: "TOGGLE_MODE" }
-  | { type: "CART_ADD_ITEM"; payload: CartItem };
+  | { type: "CART_ADD_ITEM"; payload: CartItem }
+  | { type: "CART_REMOVE_ITEM"; payload: CartItem }
+  | { type: "USER_SIGNIN"; payload: UserInfo }
+  | { type: "USER_SIGNOUT" };
 
 function reducer(state: AppStore, action: Action): AppStore {
   switch (action.type) {
@@ -52,6 +60,20 @@ function reducer(state: AppStore, action: Action): AppStore {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case "CART_REMOVE_ITEM": {
+      const cartItems = state.cart.cartItems.filter(
+        (item: CartItem) => item._id !== action.payload._id
+      );
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case "USER_SIGNIN": {
+      return { ...state, userInfo: action.payload };
+    }
+    case "USER_SIGNOUT": {
+      return initialState;
+    }
+
     default:
       return state;
   }
