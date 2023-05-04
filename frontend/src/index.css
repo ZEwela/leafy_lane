@@ -13,7 +13,7 @@
 }
 
 .rating span {
-  color: #3d6c03;
+  color: #5a980f;
 }
 
 img.large {
@@ -26,4 +26,14 @@ img.thumbnail {
 
 .small-container {
   max-width: 600px;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid #5a980f;
+  color: #5a980f;
 }

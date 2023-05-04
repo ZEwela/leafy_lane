@@ -1,5 +1,5 @@
 import React from "react";
-import { Cart, CartItem } from "./types/Cart";
+import { Cart, CartItem, ShippingAddress } from "./types/Cart";
 import { UserInfo } from "./types/UserInfo";
 type AppStore = {
   mode: string;
@@ -39,7 +39,8 @@ type Action =
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
   | { type: "USER_SIGNIN"; payload: UserInfo }
   | { type: "USER_SIGNOUT" }
-  | { type: "USER_SIGNUP"; payload: UserInfo };
+  | { type: "USER_SIGNUP"; payload: UserInfo }
+  | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress };
 
 function reducer(state: AppStore, action: Action): AppStore {
   switch (action.type) {
@@ -76,6 +77,15 @@ function reducer(state: AppStore, action: Action): AppStore {
     }
     case "USER_SIGNUP": {
       return { ...state, userInfo: action.payload };
+    }
+    case "SAVE_SHIPPING_ADDRESS": {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: action.payload,
+        },
+      };
     }
 
     default:

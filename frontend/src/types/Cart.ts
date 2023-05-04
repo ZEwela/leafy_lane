@@ -8,7 +8,7 @@ export type CartItem = {
   name: string;
 };
 
-export type shippingAddress = {
+export type ShippingAddress = {
   fullName: string;
   address: string;
   city: string;
@@ -18,7 +18,7 @@ export type shippingAddress = {
 
 export type Cart = {
   cartItems: CartItem[];
-  shippingAddress: shippingAddress;
+  shippingAddress: ShippingAddress;
   paymentMethod: string;
   shippingPrice: number;
   taxPrice: number;
