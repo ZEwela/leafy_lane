@@ -27,6 +27,7 @@ const initialState: AppStore = {
     paymentMethod: localStorage.getItem("paymentMethod")
       ? localStorage.getItem("paymentMethod")!
       : "PayPal",
+    itemsPrice: 0,
     shippingPrice: 0,
     taxPrice: 0,
     totalPrice: 0,
@@ -37,6 +38,7 @@ type Action =
   | { type: "TOGGLE_MODE" }
   | { type: "CART_ADD_ITEM"; payload: CartItem }
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
+  | { type: "CART_CLEAR" }
   | { type: "USER_SIGNIN"; payload: UserInfo }
   | { type: "USER_SIGNOUT" }
   | { type: "USER_SIGNUP"; payload: UserInfo }
@@ -69,6 +71,9 @@ function reducer(state: AppStore, action: Action): AppStore {
       );
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case "CART_CLEAR": {
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     }
     case "USER_SIGNIN": {
       return { ...state, userInfo: action.payload };
