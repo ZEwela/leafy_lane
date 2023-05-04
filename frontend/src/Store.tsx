@@ -40,7 +40,8 @@ type Action =
   | { type: "USER_SIGNIN"; payload: UserInfo }
   | { type: "USER_SIGNOUT" }
   | { type: "USER_SIGNUP"; payload: UserInfo }
-  | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress };
+  | { type: "SAVE_SHIPPING_ADDRESS"; payload: ShippingAddress }
+  | { type: "SAVE_PAYMENT_METHOD"; payload: string };
 
 function reducer(state: AppStore, action: Action): AppStore {
   switch (action.type) {
@@ -87,7 +88,15 @@ function reducer(state: AppStore, action: Action): AppStore {
         },
       };
     }
-
+    case "SAVE_PAYMENT_METHOD": {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          paymentMethod: action.payload,
+        },
+      };
+    }
     default:
       return state;
   }
