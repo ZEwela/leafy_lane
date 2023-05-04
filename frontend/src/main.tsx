@@ -17,6 +17,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { StoreProvider } from "./Store.tsx";
 import Cart from "./pages/Cart.tsx";
 import Signin from "./pages/Signin.tsx";
+import Signup from "./pages/Signup.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="product/:slug" element={<Product />} />
       <Route path="cart" element={<Cart />} />
       <Route path="signin" element={<Signin />} />
+      <Route path="signup" element={<Signup />} />
     </Route>
   )
 );

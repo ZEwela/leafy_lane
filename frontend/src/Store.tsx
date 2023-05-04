@@ -38,7 +38,8 @@ type Action =
   | { type: "CART_ADD_ITEM"; payload: CartItem }
   | { type: "CART_REMOVE_ITEM"; payload: CartItem }
   | { type: "USER_SIGNIN"; payload: UserInfo }
-  | { type: "USER_SIGNOUT" };
+  | { type: "USER_SIGNOUT" }
+  | { type: "USER_SIGNUP"; payload: UserInfo };
 
 function reducer(state: AppStore, action: Action): AppStore {
   switch (action.type) {
@@ -72,6 +73,9 @@ function reducer(state: AppStore, action: Action): AppStore {
     }
     case "USER_SIGNOUT": {
       return initialState;
+    }
+    case "USER_SIGNUP": {
+      return { ...state, userInfo: action.payload };
     }
 
     default:
