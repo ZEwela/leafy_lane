@@ -37,3 +37,12 @@ img.thumbnail {
   border-bottom: 0.2rem solid #5a980f;
   color: #5a980f;
 }
+
+.dropdown-item.active {
+  background-color: #b7fc83;
+}
+
+.dropdown-menu[data-bs-popper] {
+  left: auto;
+  right: 1px;
+}

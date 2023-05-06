@@ -3,6 +3,13 @@ import { CartItem, ShippingAddress } from "../types/Cart";
 import apiClient from "../apiClient";
 import { Order } from "../types/Order";
 
+export const useGetOrderHistoryQuery = () =>
+  useQuery({
+    queryKey: ["orderHistory"],
+    queryFn: async () =>
+      (await apiClient.get<Order[]>("/api/orders/history")).data,
+  });
+
 export const useGetPayPalClientIdQuery = () =>
   useQuery({
     queryKey: ["paypalClientId"],
