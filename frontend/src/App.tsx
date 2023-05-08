@@ -22,6 +22,10 @@ function App() {
   } = useContext(Store);
 
   useEffect(() => {
+    const nav = document.getElementById("nav");
+    nav!.classList.remove("bg-light");
+    nav!.classList.remove("bg-dark");
+    nav!.classList.add(`bg-${mode}`);
     document.body.setAttribute("data-bs-theme", mode);
   }, [mode]);
 
@@ -45,58 +49,70 @@ function App() {
       </Helmet>
       <ToastContainer position="bottom-center" limit={10} autoClose={500} />
       <header>
-        <Navbar expand="lg">
+        <Navbar
+          expand="lg"
+          fixed="top"
+          className="p-3 mb-3 d-flex flex-column align-items-strech"
+          id="nav"
+        >
           <Container>
             <LinkContainer to="/">
-              <Navbar.Brand href="/">Leafy Lane</Navbar.Brand>
+              <Navbar.Brand>Leafy Lane</Navbar.Brand>
             </LinkContainer>
-          </Container>
-          <Nav>
-            <Nav.Item>
-              <Button
-                onClick={toggleModeHandler}
-                variant="secondary"
-                className="rounded-circle size-sm  m-1"
-              >
-                <i className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}></i>
-              </Button>
-            </Nav.Item>
-            <Link to="/cart" className="nav-link">
-              Cart
-              {cart.cartItems.length > 0 && (
-                <Badge pill bg="danger">
-                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                </Badge>
-              )}
-            </Link>
-            {userInfo ? (
-              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                <LinkContainer to="/orderhistory">
-                  <NavDropdown.Item>Order History</NavDropdown.Item>
-                </LinkContainer>
-                <Link
-                  className="dropdown-item"
-                  to="#signout"
-                  onClick={signoutHandler}
-                >
-                  Sign Out
+
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav>
+                <Nav.Item>
+                  <Button
+                    onClick={toggleModeHandler}
+                    variant="secondary"
+                    className="rounded-circle size-sm  m-1"
+                  >
+                    <i
+                      className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}
+                    ></i>
+                  </Button>
+                </Nav.Item>
+                <Link to="/cart" className="nav-link">
+                  Cart
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg="success">
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    </Badge>
+                  )}
                 </Link>
-              </NavDropdown>
-            ) : (
-              <Link to="/signin" className="nav-link">
-                Sign In
-              </Link>
-            )}
-          </Nav>
+                {userInfo ? (
+                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                    <LinkContainer to="/orderhistory">
+                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    </LinkContainer>
+                    <Link
+                      className="dropdown-item"
+                      to="#signout"
+                      onClick={signoutHandler}
+                    >
+                      Sign Out
+                    </Link>
+                  </NavDropdown>
+                ) : (
+                  <Link to="/signin" className="nav-link">
+                    Sign In
+                  </Link>
+                )}
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
         </Navbar>
       </header>
 
       <main>
-        <Container className="mt-5">
+        <Container className="mt-5 pt-5">
           <Outlet />
         </Container>
       </main>
-      <footer>
+      <footer className="d-flex justify-content-center ">
         <div className="text-center">Leafy Lane 2023</div>
       </footer>
     </div>

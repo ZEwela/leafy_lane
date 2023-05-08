@@ -27,7 +27,7 @@ function ProductItem({ product }: { product: Product }) {
   };
 
   return (
-    <Card>
+    <Card className="my-2 card">
       <Link to={`/product/${product.slug}`}>
         <img src={product.image} alt={product.name} className="card-img-top" />
       </Link>
@@ -38,7 +38,7 @@ function ProductItem({ product }: { product: Product }) {
         <Rating rating={product.rating} numReviews={product.numReviews} />
         <Card.Text>£{product.price}</Card.Text>
         {product.countInStock === 0 ? (
-          <Button variant="light" disabled>
+          <Button variant="light" disabled className="align-self-end">
             Out of Stock
           </Button>
         ) : (

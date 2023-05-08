@@ -6,6 +6,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+body {
+  padding-top: 20px;
+}
 
 .product-image {
   width: auto;
@@ -38,11 +41,73 @@ img.thumbnail {
   color: #5a980f;
 }
 
-.dropdown-item.active {
+.dropdown-item:hover {
   background-color: #b7fc83;
+  color:rgb(63, 129, 107)
 }
-
+.dropdown-item {
+  color: #5c6951;
+}
+.dropdown-item.active {
+  background-color: #487823;
+}
+.dropdown-menu {
+  --bs-dropdown-bg: none
+  right: 1px;
+}
 .dropdown-menu[data-bs-popper] {
   left: auto;
   right: 1px;
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: rgb(46, 111, 89);
+}
+.navbar-brand {
+  font-weight: bold;
+  color: rgb(46, 111, 89);
+  font-size: 2rem;
+}
+
+.navbar-brand:focus,
+.navbar-brand:hover {
+  color: rgb(63, 129, 107);
+}
+a {
+  text-decoration: none;
+}
+
+/* #basic-navbar-nav {
+  text-align: end;
+} */
+
+.navbar-nav {
+  --bs-nav-link-color: none;
+  --bs-nav-link-hover-color: none;
+  color: rgb(46, 111, 89) !important;
+}
+.navbar-nav :hover {
+  font-weight: bold;
+}
+
+.navbar-collapse {
+  justify-content: end;
+}
+
+.navbar-toggle {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.card {
+  min-height: auto;
+}
+
+.card img {
+  min-height: 450px;
+  max-height: 550px;
+}
+
+.nav {
+  opacity: 1;
 }
