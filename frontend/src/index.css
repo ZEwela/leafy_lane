@@ -61,6 +61,7 @@ img.thumbnail {
 .dropdown-menu[data-bs-popper] {
   left: auto;
   right: 1px;
+  background-color: azure;
 }
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
   color: rgb(46, 111, 89);
@@ -111,6 +112,4 @@ a {
   max-height: 550px;
 }
 
-.nav {
-  opacity: 1;
-}
+
