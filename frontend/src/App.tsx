@@ -108,12 +108,12 @@ function App() {
       </header>
 
       <main>
-        <Container className="mt-5 pt-5">
+        <Container className="mt-5 pt-5 pb-30">
           <Outlet />
         </Container>
       </main>
       <footer className="d-flex justify-content-center position-absolute w-100 bottom-0 m-4">
-        <div className="text-center">Leafy Lane 2023</div>
+        <div className="text-center opacity-50">Leafy Lane 2023</div>
       </footer>
     </div>
   );
