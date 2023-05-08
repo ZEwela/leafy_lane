@@ -43,7 +43,7 @@ function App() {
   };
 
   return (
-    <div className="d-flex flex-column vh-100">
+    <div className="d-flex flex-column ">
       <Helmet>
         <title>Leafy Lane</title>
       </Helmet>
@@ -112,7 +112,7 @@ function App() {
           <Outlet />
         </Container>
       </main>
-      <footer className="d-flex justify-content-center ">
+      <footer className="d-flex justify-content-center position-absolute w-100 bottom-0 m-4">
         <div className="text-center">Leafy Lane 2023</div>
       </footer>
     </div>
