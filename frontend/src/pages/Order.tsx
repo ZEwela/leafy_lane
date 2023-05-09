@@ -1,5 +1,6 @@
-import { useContext, useEffect } from "react";
-import { Store } from "../Store";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useEffect } from "react";
+
 import { Link, useParams } from "react-router-dom";
 import {
   useGetOrderDetailsQuery,
@@ -61,7 +62,7 @@ function Order() {
       };
       loadPaypalScript();
     }
-  }, [paypalConfig]);
+  }, [paypalConfig, paypalDispatch]);
 
   const paypalButtonTransactionProps: PayPalButtonsComponentProps = {
     style: { layout: "vertical" },

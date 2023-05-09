@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useNavigate } from "react-router-dom";
 import { useGetOrderHistoryQuery } from "../hooks/orderHooks";
 import { Helmet } from "react-helmet-async";
