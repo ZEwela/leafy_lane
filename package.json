@@ -1,0 +1,21 @@
+{
+  "name": "leafy_lane",
+  "version": "1.0.0",
+  "description": "e-commerce app",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "start": "TG_ALLOW_MIXED=ALLOW node backend/build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ZEwela/leafy_lane.git"
+  },
+  "author": "Ewelina Zawol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZEwela/leafy_lane/issues"
+  },
+  "homepage": "https://github.com/ZEwela/leafy_lane#readme"
+}
