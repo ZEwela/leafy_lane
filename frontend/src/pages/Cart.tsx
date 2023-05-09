@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import { CartItem } from "../types/Cart";
@@ -55,8 +55,8 @@ function Cart() {
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="img-fluid rounded thumbnail"
-                      />
+                        className="thumbnail"
+                      />{" "}
                       <Link to={`/product/${item.slug}`}>{item.name}</Link>
                     </Col>
                     <Col md={3}>
