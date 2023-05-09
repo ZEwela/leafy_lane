@@ -1,10 +1,8 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetOrderHistoryQuery } from "../hooks/orderHooks";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { getEnabledCategories } from "trace_events";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import { Button, Table } from "react-bootstrap";

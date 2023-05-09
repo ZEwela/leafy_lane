@@ -1,5 +1,3 @@
-import React from "react";
-
 function Rating(props: {
   rating: number;
   numReviews?: number;

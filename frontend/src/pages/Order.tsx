@@ -22,7 +22,6 @@ import {
 
 function Order() {
   const { state } = useContext(Store);
-  const { userInfo } = state;
 
   const params = useParams();
   const { id: orderId } = params;
@@ -37,12 +36,12 @@ function Order() {
   const { mutateAsync: payOrder, isLoading: loadingPay } =
     usePayOrderMutation();
 
-  const testPayHandler = () => {
-    payOrder({ orderId: orderId! });
-    refetch();
-    toast.success("Order paid successfully");
-    refetch();
-  };
+  // const testPayHandler = () => {
+  //   payOrder({ orderId: orderId! });
+  //   refetch();
+  //   toast.success("Order paid successfully");
+  //   refetch();
+  // };
 
   const [{ isPending, isRejected }, paypalDispatch] = usePayPalScriptReducer();
   const { data: paypalConfig } = useGetPayPalClientIdQuery();
@@ -68,7 +67,7 @@ function Order() {
 
   const paypalButtonTransactionProps: PayPalButtonsComponentProps = {
     style: { layout: "vertical" },
-    createOrder(data, actions) {
+    createOrder(_data, actions) {
       return actions
         .order!.create({
           purchase_units: [
@@ -83,7 +82,7 @@ function Order() {
           return orderID;
         });
     },
-    onApprove(data, actions) {
+    onApprove(_data, actions) {
       return actions.order!.capture().then(async (details) => {
         try {
           payOrder({ orderId: orderId!, ...details });
@@ -214,7 +213,7 @@ function Order() {
                         <PayPalButtons
                           {...paypalButtonTransactionProps}
                         ></PayPalButtons>
-                        <Button onClick={testPayHandler}>Test Pay</Button>
+                        {/* <Button onClick={testPayHandler}>Test Pay</Button> */}
                       </div>
                     )}
                     {loadingPay && <LoadingBox />}

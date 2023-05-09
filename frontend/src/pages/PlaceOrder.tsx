@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../Store";
 import { useCreateOrderMutation } from "../hooks/orderHooks";
@@ -13,7 +13,7 @@ import LoadingBox from "../components/LoadingBox";
 function PlaceOrder() {
   const navigate = useNavigate();
   const { state, dispatch } = useContext(Store);
-  const { cart, userInfo } = state;
+  const { cart } = state;
 
   const round2 = (num: number) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
 

@@ -12,7 +12,7 @@ import {
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Store } from "./Store";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,6 +45,49 @@ function App() {
     localStorage.removeItem("paymentMethod");
     window.location.href = "/signin";
   };
+
+  const [show, setShow] = useState(false);
+
+  const navbarCollapse = (
+    <Navbar.Collapse id="basic-navbar-nav">
+      <Nav>
+        <Link to="#" className="nav-link" onClick={toggleModeHandler}>
+          <i className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}></i>
+        </Link>
+        <Link to="/cart" className="nav-link">
+          Cart
+          {cart.cartItems.length > 0 && (
+            <Badge pill bg="success">
+              {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+            </Badge>
+          )}
+        </Link>
+
+        {userInfo ? (
+          <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+            <LinkContainer to="/profile">
+              <NavDropdown.Item>Profile</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/orderhistory">
+              <NavDropdown.Item>Order History</NavDropdown.Item>
+            </LinkContainer>
+            <NavDropdown.Divider />
+            <Link
+              className="dropdown-item"
+              to="#signout"
+              onClick={signoutHandler}
+            >
+              Sign Out
+            </Link>
+          </NavDropdown>
+        ) : (
+          <Link to="/signin" className="nav-link">
+            Sign In
+          </Link>
+        )}
+      </Nav>
+    </Navbar.Collapse>
+  );
 
   return (
     <div className="d-flex flex-column">
@@ -82,48 +125,14 @@ function App() {
                 </Button>
               </InputGroup>
             </Form>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav>
-                <Link to="#" className="nav-link" onClick={toggleModeHandler}>
-                  <i
-                    className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}
-                  ></i>
-                </Link>
-                <Link to="/cart" className="nav-link">
-                  Cart
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg="success">
-                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-                    </Badge>
-                  )}
-                </Link>
-
-                {userInfo ? (
-                  <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to="/orderhistory">
-                      <NavDropdown.Item>Order History</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Divider />
-                    <Link
-                      className="dropdown-item"
-                      to="#signout"
-                      onClick={signoutHandler}
-                    >
-                      Sign Out
-                    </Link>
-                  </NavDropdown>
-                ) : (
-                  <Link to="/signin" className="nav-link">
-                    Sign In
-                  </Link>
-                )}
-              </Nav>
-            </Navbar.Collapse>
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              id="collapse_togle"
+              onClick={() => setShow(!show)}
+            />
+            {!show && navbarCollapse}
           </div>
+          {show && <div>{navbarCollapse}</div>}
 
           <div className="sub-header">
             <div className="d-flex">
