@@ -11,7 +11,7 @@ import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import { Helmet } from "react-helmet-async";
-import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
+import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {
   PayPalButtons,
@@ -21,8 +21,6 @@ import {
 } from "@paypal/react-paypal-js";
 
 function Order() {
-  const { state } = useContext(Store);
-
   const params = useParams();
   const { id: orderId } = params;
 
