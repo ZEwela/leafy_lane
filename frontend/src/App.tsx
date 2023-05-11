@@ -66,6 +66,11 @@ function App() {
 
         {userInfo ? (
           <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+            {userInfo.isAdmin && (
+              <LinkContainer to="/admin">
+                <NavDropdown.Item>Admin Panel</NavDropdown.Item>
+              </LinkContainer>
+            )}
             <LinkContainer to="/profile">
               <NavDropdown.Item>Profile</NavDropdown.Item>
             </LinkContainer>
