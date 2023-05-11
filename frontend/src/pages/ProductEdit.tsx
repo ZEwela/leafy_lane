@@ -7,6 +7,7 @@ import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import ProductForm from "../components/ProductForm";
+import { Product } from "../types/Product";
 
 function ProductEdit() {
   const { id } = useParams();
@@ -18,7 +19,7 @@ function ProductEdit() {
     error,
   } = useGetProductDetailsByIdQuery(id!);
 
-  const submitHandler = (values: object) => {
+  const submitHandler = (values: Product) => {
     alert("Product updated");
     //   dispatch({
     //     type: "UPDATE_PRODUCT",

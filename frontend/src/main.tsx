@@ -28,6 +28,7 @@ import OrderHistory from "./pages/OrderHistory.tsx";
 import AdminProfile from "./pages/AdminProfile.tsx";
 import AdminProducts from "./pages/AdminProducts.tsx";
 import ProductEdit from "./pages/ProductEdit.tsx";
+import ProductCreate from "./pages/ProductCreate.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +47,7 @@ const router = createBrowserRouter(
         <Route path="admin" element={<AdminProfile />} />
         <Route path="admin/products" element={<AdminProducts />} />
         <Route path="admin/product/:id/edit" element={<ProductEdit />} />
+        <Route path="admin/product/create" element={<ProductCreate />} />
       </Route>
     </Route>
   )

@@ -18,6 +18,19 @@ function AdminProducts() {
         <title>Products</title>
       </Helmet>
       <h1>Products</h1>
+      <div className="d-flex justify-content-end">
+        <Button
+          className="p-2 m-2 "
+          type="button"
+          variant="success"
+          onClick={() => {
+            navigate(`/admin/product/create`);
+          }}
+        >
+          Create Product
+        </Button>
+      </div>
+
       {isLoading ? (
         <LoadingBox />
       ) : error ? (
@@ -44,6 +57,7 @@ function AdminProducts() {
                   <Button
                     type="button"
                     variant="success"
+                    className="m-1"
                     onClick={() => {
                       navigate(`/product/${product.slug}`);
                     }}
@@ -52,6 +66,7 @@ function AdminProducts() {
                   </Button>{" "}
                   <Button
                     type="button"
+                    className="m-1"
                     variant="success"
                     onClick={() => {
                       navigate(`/admin/product/${product._id}/edit`);

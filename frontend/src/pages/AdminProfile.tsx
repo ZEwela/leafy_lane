@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 
 function AdminProfile() {
   return (
@@ -10,7 +10,7 @@ function AdminProfile() {
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Products</Card.Title>
-              <Link to="/admin/products">Edit</Link>
+              <Link to="/admin/products">Check</Link>
             </Card.Body>
           </Card>
           <Card className="mb-3">
