@@ -15,7 +15,7 @@ body {
 
 /* PRODUCT_ITEM */
 .product-item-card img {
-  min-height: 200px;
+  min-height: 400px;
   max-height: 450px;
 }
 
