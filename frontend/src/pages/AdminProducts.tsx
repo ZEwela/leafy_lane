@@ -6,11 +6,21 @@ import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import { Button, Table } from "react-bootstrap";
-import { useGetProductsQuery } from "../hooks/productHooks";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "../hooks/productHooks";
 
 function AdminProducts() {
   const navigate = useNavigate();
   const { data: products, isLoading, error } = useGetProductsQuery();
+
+  const { mutateAsync: deleteProduct } = useDeleteProductMutation();
+
+  const handleDelete = (id: string, name: string) => {
+    alert(`Do you want to delete product: ${name}`);
+    deleteProduct(id);
+  };
 
   return (
     <div>
@@ -73,6 +83,14 @@ function AdminProducts() {
                     }}
                   >
                     Edit
+                  </Button>{" "}
+                  <Button
+                    type="button"
+                    className="m-1 opacity-75"
+                    variant="danger"
+                    onClick={() => handleDelete(product._id, product.name)}
+                  >
+                    Delete
                   </Button>
                 </td>
               </tr>

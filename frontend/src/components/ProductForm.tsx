@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useFormik } from "formik";
 import { Button, Form } from "react-bootstrap";
+import { useUploadFileMutation } from "../hooks/fileHooks";
 import { Product } from "../types/Product";
 
 type Props = {
@@ -25,9 +27,21 @@ function ProductForm({ product, submitHandler, actionType }: Props) {
     onSubmit: (values) => submitHandler(values),
   });
 
+  const { mutateAsync: upload } = useUploadFileMutation();
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData();
+    const file = e.target.files![0];
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    upload(formData);
+  };
+
   return (
-    <Form onSubmit={formik.handleSubmit}>
-      <pre>{JSON.stringify(formik.values, null, 2)}</pre>
+    <Form
+      onSubmit={formik.handleSubmit}
+      encType="multipart/form-data"
+      className="mw-800px m-auto mt-5"
+    >
       <Form.Group className="mb-3" controlId="name">
         <Form.Label>{"Name"}</Form.Label>
         <Form.Control
@@ -63,9 +77,14 @@ function ProductForm({ product, submitHandler, actionType }: Props) {
         <Form.Label>Image</Form.Label>
         <Form.Control
           type="file"
-          value={""}
           name="image"
-          onChange={formik.handleChange}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            handleUpload(e);
+            formik.setFieldValue(
+              "image",
+              `../images/${e.target.files![0].name}`
+            );
+          }}
           required
         />
       </Form.Group>

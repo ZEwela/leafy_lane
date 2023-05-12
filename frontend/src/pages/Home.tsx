@@ -16,7 +16,7 @@ function Home() {
   ) : (
     <Row>
       {products?.map((product) => (
-        <Col key={product.slug} sm={6} md={4} lg={3}>
+        <Col key={product.slug} sm={8} md={6} lg={3}>
           <ProductItem product={product} />
         </Col>
       ))}

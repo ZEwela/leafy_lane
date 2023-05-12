@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { useGetProductDetailsByIdQuery } from "../hooks/productHooks";
+import {
+  useEditProductMutation,
+  useGetProductDetailsByIdQuery,
+} from "../hooks/productHooks";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import { ApiError } from "../types/ApiError";
 import ProductForm from "../components/ProductForm";
 import { Product } from "../types/Product";
+import { toast } from "react-toastify";
 
 function ProductEdit() {
   const { id } = useParams();
@@ -19,19 +23,16 @@ function ProductEdit() {
     error,
   } = useGetProductDetailsByIdQuery(id!);
 
-  const submitHandler = (values: Product) => {
-    alert("Product updated");
-    //   dispatch({
-    //     type: "UPDATE_PRODUCT",
-    //     payload: {
-    //       fullName,
-    //       address,
-    //       city,
-    //       postalCode,
-    //       country,
-    //     },
-    //   });
-    navigate(`/product/${product?.slug}`);
+  const { mutateAsync: edit } = useEditProductMutation();
+
+  const editHandler = async (editedProduct: Product) => {
+    editedProduct._id = id!;
+    try {
+      const data = await edit(editedProduct);
+      navigate(`/product/${data.product.slug}`);
+    } catch (error) {
+      toast.error(getError(error as ApiError));
+    }
   };
 
   return isLoading ? (
@@ -45,13 +46,12 @@ function ProductEdit() {
       <Helmet>
         <title>Edit Product</title>
       </Helmet>
-      <div className="container small-container">
-        <h1 className="my-3">Edit Product</h1>
-      </div>
+      <h1>Edit Product</h1>
+
       {product && (
         <ProductForm
           product={product}
-          submitHandler={submitHandler}
+          submitHandler={editHandler}
           actionType="Edit"
         />
       )}

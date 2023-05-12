@@ -32,3 +32,21 @@ export const useCreateProductMutation = () =>
         )
       ).data,
   });
+
+export const useEditProductMutation = () =>
+  useMutation({
+    mutationFn: async (product: Product) =>
+      (
+        await apiClient.put<{ message: string; product: Product }>(
+          `/api/products/${product._id}`,
+          product
+        )
+      ).data,
+  });
+
+export const useDeleteProductMutation = () =>
+  useMutation({
+    mutationFn: async (id: string) => {
+      (await apiClient.delete<{ message: string }>(`api/products/${id}`)).data;
+    },
+  });

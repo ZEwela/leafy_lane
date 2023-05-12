@@ -5,7 +5,15 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { convertProductToCartItem, getError } from "../utils";
 import { ApiError } from "../types/ApiError";
-import { Row, Col, Button, ListGroup, Card, Badge } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  ListGroup,
+  Card,
+  Badge,
+  ListGroupItem,
+} from "react-bootstrap";
 import Rating from "../components/Rating";
 import { useContext } from "react";
 import { Store } from "../Store";
@@ -95,6 +103,20 @@ function Product() {
                     </Button>
                   </div>
                 </ListGroup.Item>
+              )}
+              {state.userInfo?.isAdmin && (
+                <ListGroupItem>
+                  <div className="d-grid">
+                    <Button
+                      variant="warning"
+                      onClick={() =>
+                        navigate(`/admin/product/${product._id}/edit`)
+                      }
+                    >
+                      Edit Product
+                    </Button>
+                  </div>
+                </ListGroupItem>
               )}
             </ListGroup>
           </Card.Body>
