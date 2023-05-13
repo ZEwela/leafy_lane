@@ -2,21 +2,23 @@ import { Col, Row } from "react-bootstrap";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import ProductItem from "../components/ProductItem";
+import { Product } from "../types/Product";
+import { useOutletContext } from "react-router-dom";
 import { useGetProductsQuery } from "../hooks/productHooks";
-import { ApiError } from "../types/ApiError";
-import { getError } from "../utils";
 
 function Home() {
-  const { data: products, isLoading, error } = useGetProductsQuery();
+  const searchResults: Product[] = useOutletContext();
+  const { data: products } = useGetProductsQuery();
+  const serachResultArr = searchResults || products;
 
-  return isLoading ? (
+  return !serachResultArr ? (
     <LoadingBox />
-  ) : error ? (
-    <MessageBox variant="danger">{getError(error as ApiError)}</MessageBox>
+  ) : serachResultArr.length === 0 ? (
+    <MessageBox variant="warning">Produnt not found</MessageBox>
   ) : (
-    <Row>
-      {products?.map((product) => (
-        <Col key={product.slug} sm={8} md={6} lg={3}>
+    <Row className="justify-content-center">
+      {serachResultArr?.map((product: Product) => (
+        <Col key={product.slug} sm={6} md={6} lg={3}>
           <ProductItem product={product} />
         </Col>
       ))}

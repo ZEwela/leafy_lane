@@ -1,15 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  Container,
-  Navbar,
-  Nav,
-  Button,
-  InputGroup,
-  FormControl,
-  Form,
-  Badge,
-  NavDropdown,
-} from "react-bootstrap";
+import { Container, Navbar, Nav, Badge, NavDropdown } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Store } from "./Store";
@@ -18,6 +8,9 @@ import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LinkContainer } from "react-router-bootstrap";
+import Search from "./components/Search";
+import { Product } from "./types/Product";
+import { useGetProductsQuery } from "./hooks/productHooks";
 
 function App() {
   const theName = "Leafy Lane";
@@ -25,6 +18,12 @@ function App() {
     state: { mode, cart, userInfo },
     dispatch,
   } = useContext(Store);
+
+  const [searchResults, setSearchResults] = useState<Product[]>();
+  const { data: products } = useGetProductsQuery();
+  useEffect(() => {
+    setSearchResults(products);
+  }, [products]);
 
   useEffect(() => {
     const nav = document.getElementById("nav");
@@ -109,28 +108,14 @@ function App() {
           id="nav"
         >
           <div className="d-flex justify-content-between align-items-center">
-            <LinkContainer to="/">
+            <LinkContainer to="/" onClick={() => setSearchResults(products)}>
               <Navbar.Brand>{theName}</Navbar.Brand>
             </LinkContainer>
-            <Form className="flex-grow-1 d-flex me-auto p-2">
-              <InputGroup>
-                <FormControl
-                  type="text"
-                  name="search"
-                  id="search"
-                  placeholder={`Search ${theName}`}
-                  aria-label={`Search ${theName}`}
-                  aria-describedby="button-search"
-                ></FormControl>
-                <Button
-                  variant="outline-primary"
-                  type="submit"
-                  id="button-search"
-                >
-                  <i className="fas fa-search"></i>
-                </Button>
-              </InputGroup>
-            </Form>
+            <Search
+              theName={theName}
+              setSearchResults={setSearchResults}
+              products={products!}
+            />
             <Navbar.Toggle
               aria-controls="basic-navbar-nav"
               id="collapse_togle"
@@ -142,7 +127,11 @@ function App() {
 
           <div className="sub-header">
             <div className="d-flex">
-              <Link to="/" className="nav-link navbar-nav p-1">
+              <Link
+                to="/"
+                className="nav-link navbar-nav p-1"
+                onClick={() => setSearchResults(products)}
+              >
                 <i className="fas fa-bars"> All</i>
               </Link>
             </div>
@@ -152,7 +141,7 @@ function App() {
 
       <main>
         <Container className="mt-5 py-5">
-          <Outlet />
+          <Outlet context={searchResults} />
         </Container>
       </main>
       <footer className="d-flex justify-content-center position-absolute w-100 bottom-0 m-2">
