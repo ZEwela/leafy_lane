@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useUploadFileMutation } from "../hooks/fileHooks";
 import { Product } from "../types/Product";
-import { dirname } from "path";
 
 type Props = {
   product?: Product;
