@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { Button, Form } from "react-bootstrap";
 import { useUploadFileMutation } from "../hooks/fileHooks";
 import { Product } from "../types/Product";
+import { dirname } from "path";
 
 type Props = {
   product?: Product;
@@ -33,6 +34,7 @@ function ProductForm({ product, submitHandler, actionType }: Props) {
     const file = e.target.files![0];
     formData.append("file", file);
     formData.append("fileName", file.name);
+    console.log("from product form", __dirname);
     upload(formData);
   };
 
