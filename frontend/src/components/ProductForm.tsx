@@ -34,7 +34,6 @@ function ProductForm({ product, submitHandler, actionType }: Props) {
     const file = e.target.files![0];
     formData.append("file", file);
     formData.append("fileName", file.name);
-    console.log("from product form", __dirname);
     upload(formData);
   };
 

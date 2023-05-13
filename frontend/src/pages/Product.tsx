@@ -33,7 +33,6 @@ function Product() {
   const { cartItems } = state.cart;
 
   const addToCartHandler = () => {
-    console.log("from product", process.cwd());
     const existItem = cartItems.find((x) => x._id === product!._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     if (product!.countInStock < quantity) {
