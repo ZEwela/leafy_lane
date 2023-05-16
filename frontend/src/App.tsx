@@ -25,6 +25,13 @@ function App() {
     setSearchResults(products);
   }, [products]);
 
+  const wrappMenu = () => {
+    const basicNavbarNav = document.getElementById("basic-navbar-nav");
+    const navbarToggle = document.getElementById("collapse_togle");
+    basicNavbarNav?.classList.remove("show");
+    navbarToggle?.classList.add("collapsed");
+  };
+
   useEffect(() => {
     const nav = document.getElementById("nav");
     nav!.classList.remove("bg-light");
@@ -51,10 +58,17 @@ function App() {
   const navbarCollapse = (
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav>
-        <Link to="#" className="nav-link" onClick={toggleModeHandler}>
+        <Link
+          to="#"
+          className="nav-link"
+          onClick={() => {
+            wrappMenu();
+            toggleModeHandler();
+          }}
+        >
           <i className={mode === "dark" ? "fa fa-moon" : "fa fa-sun"}></i>
         </Link>
-        <Link to="/cart" className="nav-link">
+        <Link to="/cart" className="nav-link" onClick={() => wrappMenu()}>
           Cart
           {cart.cartItems.length > 0 && (
             <Badge pill bg="success">
@@ -66,27 +80,30 @@ function App() {
         {userInfo ? (
           <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
             {userInfo.isAdmin && (
-              <LinkContainer to="/admin">
+              <LinkContainer to="/admin" onClick={() => wrappMenu()}>
                 <NavDropdown.Item>Admin Panel</NavDropdown.Item>
               </LinkContainer>
             )}
-            <LinkContainer to="/profile">
+            <LinkContainer to="/profile" onClick={() => wrappMenu()}>
               <NavDropdown.Item>Profile</NavDropdown.Item>
             </LinkContainer>
-            <LinkContainer to="/orderhistory">
+            <LinkContainer to="/orderhistory" onClick={() => wrappMenu()}>
               <NavDropdown.Item>Order History</NavDropdown.Item>
             </LinkContainer>
             <NavDropdown.Divider />
             <Link
               className="dropdown-item"
               to="#signout"
-              onClick={signoutHandler}
+              onClick={() => {
+                wrappMenu();
+                signoutHandler();
+              }}
             >
               Sign Out
             </Link>
           </NavDropdown>
         ) : (
-          <Link to="/signin" className="nav-link">
+          <Link to="/signin" className="nav-link" onClick={() => wrappMenu()}>
             Sign In
           </Link>
         )}
