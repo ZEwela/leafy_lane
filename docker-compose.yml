@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    links:
+      - backend
+    networks:
+      - lifyLaneNetwork
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend/src:/backend/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mongo
+    networks:
+      - lifyLaneNetwork
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --noauth
+    networks:
+      - lifyLaneNetwork
+networks:
+  lifyLaneNetwork:
+    driver: bridge
+volumes:
+  data:
